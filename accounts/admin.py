@@ -1,7 +1,6 @@
 """
-admin.py:
-    Django admin configuraton for our CustomUser model.
-    We customize the built-in UserAdmin to incorporate our CustomUser forms and fields.
+Django admin configuraton for our CustomUser model.
+We customize the built-in UserAdmin to incorporate our CustomUser forms and fields.
 """
 
 from django.contrib import admin
@@ -41,10 +40,10 @@ class CustomUserAdmin(UserAdmin):
 
     # Extending the default fieldsets to include our 'age' field
     # when editing a user in the admin
-    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age",)}),)
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age",)}),)  # type: ignore
 
     # Extending the default fieldsets to include 'age' when creating a new user
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("age",)}),)
+    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("age",)}),)  # type: ignore
 
 
 # Register our CustomUser model with the customized admin

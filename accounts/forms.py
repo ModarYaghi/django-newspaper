@@ -13,7 +13,7 @@ class CustomUserCreationForm(UserCreationForm):
     UserCreationForm by adding an 'aga' field.
     """
 
-    class Meta:
+    class Meta:  # type: ignore
         model = CustomUser
         fields = UserCreationForm.Meta.fields + ("age",)
 
@@ -24,6 +24,6 @@ class CustomUserChangeForm(UserChangeForm):
     UserChangeForm without additional fields.
     """
 
-    class Meta:
+    class Meta:  # type: ignore
         model = CustomUser
         fields = UserChangeForm.Meta.fields
