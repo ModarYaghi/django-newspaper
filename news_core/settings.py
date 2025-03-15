@@ -55,7 +55,7 @@ ROOT_URLCONF = "news_core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,3 +127,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # `User` model. We'll call oru custom user model `CustomUser`.
 # Since it will exist within `accounts` app, I will refer to it as `accounts.CustomUser`.
 AUTH_USER_MODEL = "accounts.CustomUser"
+
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
