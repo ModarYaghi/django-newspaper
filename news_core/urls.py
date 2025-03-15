@@ -25,5 +25,7 @@ urlpatterns = [
     path(
         "accounts/", include("django.contrib.auth.urls")
     ),  # include the built-in authentication URLs under the `accounts/` namespace.
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path(
+        "", TemplateView.as_view(template_name="home.html"), name="home"
+    ),  # define root URL of the site, using the TemplateView since it's a static hompepage.
 ]
