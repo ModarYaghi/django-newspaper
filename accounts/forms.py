@@ -15,7 +15,17 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:  # type: ignore
         model = CustomUser
-        fields = UserCreationForm.Meta.fields + ("age",)
+        # Take built-in fields and adding "age" to them.
+        # fields = UserCreationForm.Meta.fields + ("age",)
+
+        # Explicitly define fields as a new tuple, replacing any defaults
+        # that might have been set in the parent form. This method gives
+        # full control over the order and content of the fields.
+        fields = (
+            "username",
+            "email",
+            "age",
+        )
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -26,4 +36,10 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:  # type: ignore
         model = CustomUser
-        fields = UserChangeForm.Meta.fields
+        # fields = UserChangeForm.Meta.fields
+        #
+        fields = (
+            "username",
+            "email",
+            "age",
+        )
