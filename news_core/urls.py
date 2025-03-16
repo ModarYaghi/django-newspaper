@@ -17,7 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic.base import TemplateView
+
+# from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,7 +26,10 @@ urlpatterns = [
     path(
         "accounts/", include("django.contrib.auth.urls")
     ),  # include the built-in authentication URLs under the `accounts/` namespace.
-    path(
-        "", TemplateView.as_view(template_name="home.html"), name="home"
-    ),  # define root URL of the site, using the TemplateView since it's a static hompepage.
+    #
+    # the following TemplateView url replaced with pages.urls, since I created a dedicted pages app, for better organization, maintainability and scalability.
+    # path(
+    # "", TemplateView.as_view(template_name="home.html"), name="home"
+    # ),  # define root URL of the site, using the TemplateView since it's a static hompepage.
+    path("", include("pages.urls")),
 ]
