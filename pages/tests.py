@@ -25,7 +25,7 @@ class HomePageTests(SimpleTestCase):
         indicating that the homepage is correctly set up.
         """
         response = self.client.get("/")
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)  # type: ignore
 
     def test_homepage_view(self):
         """
@@ -40,6 +40,6 @@ class HomePageTests(SimpleTestCase):
                 that the expected content is displayed.
         """
         response = self.client.get(reverse("home"))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)  # type: ignore
         self.assertTemplateUsed(response, "home.html")
         self.assertContains(response, "Home")
