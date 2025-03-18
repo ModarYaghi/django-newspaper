@@ -31,5 +31,7 @@ urlpatterns = [
     # path(
     # "", TemplateView.as_view(template_name="home.html"), name="home"
     # ),  # define root URL of the site, using the TemplateView since it's a static hompepage.
+    #
+    path("articles/", include("articles.urls")),
     path("", include("pages.urls")),
 ]
