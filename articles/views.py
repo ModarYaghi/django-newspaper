@@ -1,3 +1,6 @@
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+)  # To restricted views to logged in users only.
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -8,7 +11,7 @@ from .models import Article
 #
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     """
     Create a new article
     """
@@ -43,7 +46,7 @@ class ArticleCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
     """
     List all articles created
     """
@@ -52,7 +55,7 @@ class ArticleListView(ListView):
     template_name = "article_list.html"
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(LoginRequiredMixin, DetailView):
     """
     Present an article
     """
@@ -61,7 +64,7 @@ class ArticleDetailView(DetailView):
     template_name = "article_detail.html"
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     """
     Update/edit an article
     """
@@ -74,7 +77,7 @@ class ArticleUpdateView(UpdateView):
     template_name = "article_edit.html"
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     """
     Delete an article
     """
