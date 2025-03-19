@@ -24,7 +24,7 @@
 
       <div class="card-footer text-center text-muted">
 
-        {% if article.author.pk == request.user.pk %}
+        {% if article.author.pk == request.user.pk or request.user.is_superuser %}
           <a href="{% url 'article_edit' article.pk %}">[Edit]</a>
             <|>
           <a href="{% url 'article_delete' article.pk %}">[Delete]</a>
