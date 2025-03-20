@@ -41,3 +41,52 @@ class Article(models.Model):
         This is useful for redirecting after creating or editing an article.
         """
         return reverse("article_detail", kwargs={"pk": self.pk})
+
+
+class Comment(models.Model):
+    """
+    Represents a user comment on an article.
+
+    Each Comment is linked to an Article and an Author.
+    The comment text is limited ot 140 characters.
+    """
+
+    # Forign key to the Article model.
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        help_text="Select the article this comment is related to.",
+    )
+
+    # A short text comment with a maximum of 140 characters.
+    comment = models.CharField(
+        max_length=140,
+        help_text="Enter your comment (max 140 characters).",
+    )
+
+    # Foreign key to the user who authored the comment.
+    # Uses the custom user model defined in settings.AUTH_USER_MODEL.
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        help_text="User who authored this comment",
+    )
+
+    def __str__(self):  # type: ignore
+        """
+        Return a string representation of the Comment instance.
+
+        This is typically used in the Django admin or shell for a quick overview.
+        Here, it returns the comment text.
+        """
+
+        return self.comment
+
+    def get_absolute_url(self):
+        """
+        Return teh URL to access the article list.
+
+        This method is used to determine the redirection target after a Comment is created or updated.
+        """
+
+        return reverse("article_list")
