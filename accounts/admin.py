@@ -32,8 +32,8 @@ class CustomUserAdmin(UserAdmin):
 
     # The fields displayed in the list view of the admin
     list_display = [
-        "email",
         "username",
+        "email",
         "age",
         "is_staff",
     ]
