@@ -8,28 +8,31 @@
 
     <div class="card">
 
-      <div clas="card-header">
-
+      <div class="card-header">
         <span class="fw-bold">
-          <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+          <a href="{{ article.get_absolute_url }}" style="text-decoration: none;">{{ article.title }}</a>
         </span> &middot;
 
         <span class="text-muted">by {{ article.author }} | {{ article.date }}</span>
-
       </div>
 
       <div class="card-body">
         {{ article.body }}
+        {% if article.author.pk == request.user.pk or request.user.is_superuser %}
+          <a href="{% url 'article_edit' article.pk %}" style="text-decoration: none;">[Edit]</a>
+          <a href="{% url 'article_delete' article.pk %}" style="text-decoration: none;">[Delete]</a>
+        {% endif %}
       </div>
 
-      <div class="card-footer text-center text-muted">
-
-        {% if article.author.pk == request.user.pk or request.user.is_superuser %}
-          <a href="{% url 'article_edit' article.pk %}">[Edit]</a>
-            <|>
-          <a href="{% url 'article_delete' article.pk %}">[Delete]</a>
-        {% endif %}
-
+      <div class="card-footer">
+        {% for comment in article.comment_set.all %}
+        <p>
+          <span class="fw-bold">
+            {{ comment.author }} &middot;
+          </span>
+          {{ comment }}
+        </p>
+        {% endfor %}
       </div>
 
     </div>
