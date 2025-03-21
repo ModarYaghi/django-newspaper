@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+from .forms import CommentForm
 from .models import Article
 
 # Create your views here.
@@ -67,6 +68,14 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
 
     model = Article
     template_name = "article_detail.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        context_data
+        """
+        context = super().get_context_data(**kwargs)
+        context["form"] = CommentForm()
+        return context
 
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
