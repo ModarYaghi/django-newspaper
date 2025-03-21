@@ -24,13 +24,21 @@
       </div>
       {% if article.comment_set.exists %}
         <div class="card-footer bg-light">
-          <strong>💬 Comments:</strong>
-          {% for comment in article.comment_set.all %}
-            <p class="mb-1"><strong>{{ comment.author }}</strong>: {{ comment }}</p>
-          {% endfor %}
+          <strong>{{ article.comment_set.count }} Comments</strong>
+          <ul class="list-unstyled mt-2">
+            {% for comment in article.comment_set.all|slice:":2" %}
+              <li class="mb-1">
+                <strong>{{ comment.author }}:</strong> {{ comment|truncatewords:10 }}
+              </li>
+            {% endfor %}
+          </ul>
+          {% if article.comment_set.count > 2 %}
+            <small>
+              <a href="{{ article.get_absolute_url }}" class="text-muted text-decoration-none">...read more</a>
+            </small>
+          {% endif %}
         </div>
       {% endif %}
-    </div>
   {% endfor %}
 {% endblock %}
 
