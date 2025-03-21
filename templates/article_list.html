@@ -22,6 +22,7 @@
           <a href="{% url 'article_edit' article.pk %}" style="text-decoration: none;">[Edit]</a>
           <a href="{% url 'article_delete' article.pk %}" style="text-decoration: none;">[Delete]</a>
         {% endif %}
+        <a href="{{ article.get_absolute_url }}">New Comment</a>
       </div>
 
       <div class="card-footer">
